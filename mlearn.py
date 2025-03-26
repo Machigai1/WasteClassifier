@@ -75,7 +75,7 @@ with col2:
     st.markdown("<div style='min-height:1px'></div>", unsafe_allow_html=True)  # Increase column height
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
-        st.image(image, caption="Uploaded Image", width=300)  # Reduce image size slightly
+        st.image(image, caption="Uploaded Image", width=570)  # Reduce image size slightly
         
         # Predict instantly after upload
         prediction_result = predict_waste(image, uploaded_file.name)
