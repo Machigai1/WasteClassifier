@@ -55,14 +55,14 @@ def predict_waste(image, filename):
 # Streamlit UI
 st.set_page_config(page_title="Waste Classifier", page_icon="♻️", layout="wide")
 
-# Background image using CSS
-background_image = "https://img.goodfon.com/original/4464x2511/d/6e/selective-coloring-black-background-dark-background-simple-1.jpg"  # Replace with your image URL or path
+# Background GIF using CSS
+background_gif = "https://www.icegif.com/wp-content/uploads/2023/07/icegif-86.gif"  # Replace with your GIF URL or path
 
 st.markdown(
     f"""
     <style>
     .stApp {{
-        background-image: url("{background_image}");
+        background-image: url("{background_gif}");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
