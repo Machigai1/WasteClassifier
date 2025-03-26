@@ -56,7 +56,7 @@ def predict_waste(image, filename):
 st.set_page_config(page_title="Waste Classifier", page_icon="♻️", layout="wide")
 
 # Background image using CSS
-background_image = "https://png.pngtree.com/thumb_back/fh260/background/20220217/pngtree-beautiful-hand-painted-green-garbage-collection-illustration-background-image_945238.jpg"  # Replace with your image URL or path
+background_image = "https://png.pngtree.com/thumb_back/fh260/background/20231027/pngtree-texture-of-a-garbage-bag-made-from-black-plastic-image_13708847.png"  # Replace with your image URL or path
 
 st.markdown(
     f"""
