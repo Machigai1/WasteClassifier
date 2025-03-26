@@ -56,7 +56,7 @@ def predict_waste(image, filename):
 st.set_page_config(page_title="Waste Classifier", page_icon="♻️", layout="wide")
 
 # Background image using CSS
-background_image = "https://images.wallpapersden.com/image/download/dark-anime-girl-art_a2tnbZSZmpqtpaSklGdqZWWtZmpmbQ.jpg"  # Replace with your image URL or path
+background_image = "https://img.goodfon.com/original/4464x2511/d/6e/selective-coloring-black-background-dark-background-simple-1.jpg"  # Replace with your image URL or path
 
 st.markdown(
     f"""
