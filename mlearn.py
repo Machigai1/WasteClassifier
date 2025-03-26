@@ -56,7 +56,7 @@ def predict_waste(image, filename):
 st.set_page_config(page_title="Waste Classifier", page_icon="♻️", layout="wide")
 
 # Background GIF using CSS
-background_gif = "https://steamuserimages-a.akamaihd.net/ugc/1022823759368616012/877521E9F3AA7F8AFA2936C36D4E6C87C84D375C/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"  # Replace with your GIF URL or path
+background_gif = "https://images.steamusercontent.com/ugc/1022823759368616012/877521E9F3AA7F8AFA2936C36D4E6C87C84D375C/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"  # Replace with your GIF URL or path
 
 st.markdown(
     f"""
