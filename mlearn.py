@@ -5,15 +5,15 @@ import cv2
 import os
 from PIL import Image
 
-# Load the trained model
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-model_path = os.path.join(BASE_DIR, "wasteclass.h5")
+# Load the trained model dynamically
+model_path = "wasteclass.h5"
 model = tf.keras.models.load_model(model_path)
 
-# Define subcategories
+# Define subcategories manually
 biodegradable_types = ["Food", "Paper", "Cardboard"]
 non_biodegradable_types = ["Glass", "Metal", "Plastic"]
 
+# Function to determine subcategory (Mock logic: Modify as needed)
 def classify_subcategory(is_biodegradable, filename):
     filename = filename.lower()
     if is_biodegradable:
@@ -31,16 +31,18 @@ def classify_subcategory(is_biodegradable, filename):
         else:
             return "Plastic"
 
+# Function to preprocess and predict image
 def predict_waste(image):
-    img = np.array(image)
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-    img = cv2.resize(img, (224, 224))
-    img = img / 255.0
-    img = np.expand_dims(img, axis=0)
+    img = image.resize((224, 224))  # Resize to match model input size
+    img = np.array(img) / 255.0  # Normalize
+    img = np.expand_dims(img, axis=0)  # Add batch dimension
     
-    prediction = model.predict(img)[0][0]
+    # Predict
+    prediction = model.predict(img)[0][0]  # Get probability for Non-Biodegradable
+    
+    # Determine category
     is_biodegradable = prediction <= 0.5
-    subcategory = classify_subcategory(is_biodegradable, "uploaded_image.jpg")
+    subcategory = classify_subcategory(is_biodegradable, image.filename)
     
     if is_biodegradable:
         return f"Biodegradable - {subcategory} ({(1 - prediction) * 100:.2f}%)"
@@ -49,15 +51,15 @@ def predict_waste(image):
 
 # Streamlit UI
 st.title("Waste Classifier")
-st.write("Upload an image to classify it as Biodegradable or Non-Biodegradable.")
+st.write("Upload an image to classify the waste type.")
 
+# File uploader
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption="Uploaded Image", use_column_width=True)
     
-    if st.button("Classify"):
-        result = predict_waste(image)
-        st.write("### Prediction:")
-        st.success(result)
+    # Predict instantly after upload
+    prediction_result = predict_waste(image)
+    st.write("Prediction:", prediction_result)
