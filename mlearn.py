@@ -56,7 +56,7 @@ def predict_waste(image, filename):
 st.set_page_config(page_title="Waste Classifier", page_icon="♻️", layout="wide")
 
 # Background image using CSS
-background_image = "https://static.wikia.nocookie.net/mierukochan/images/a/af/Spirit_22_Face.jpg"  # Replace with your image URL or path
+background_image = "https://img.freepik.com/premium-photo/black-compost-bin-overflowing-with-fresh-fruits-vegetables-organic-waste-set-against-dark-background-sustainable-living-waste-management-concepts_29120-58251.jpg"  # Replace with your image URL or path
 
 st.markdown(
     f"""
