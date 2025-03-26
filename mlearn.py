@@ -71,7 +71,7 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-st.title("♻️ Waste Classification System")
+st.title("♻️ Garbage Classification System")
 
 # Layout with two columns, adjusting height for right column
 col1, col2 = st.columns([1, 1], gap="large")
