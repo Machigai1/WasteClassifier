@@ -2,18 +2,17 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 import cv2
-import os
 from PIL import Image
 
-# Load the trained model dynamically
+# Load trained model
 model_path = "wasteclass.h5"
 model = tf.keras.models.load_model(model_path)
 
-# Define subcategories manually
+# Define subcategories
 biodegradable_types = ["Food", "Paper", "Cardboard"]
 non_biodegradable_types = ["Glass", "Metal", "Plastic"]
 
-# Function to determine subcategory (Mock logic: Modify as needed)
+# Function to classify subcategory
 def classify_subcategory(is_biodegradable, filename):
     filename = filename.lower()
     if is_biodegradable:
@@ -31,19 +30,17 @@ def classify_subcategory(is_biodegradable, filename):
         else:
             return "Plastic"
 
-# Function to preprocess and predict image
-def predict_waste(image):
-    img = image.resize((224, 224))  # Resize to match model input size
-    img = np.array(img) / 255.0  # Normalize
-    img = np.expand_dims(img, axis=0)  # Add batch dimension
+# Preprocessing & Prediction Function
+def predict_waste(image, filename):
+    img = image.resize((224, 224))  
+    img = np.array(img).astype('float32') / 255.0  
+    img = np.expand_dims(img, axis=0)  
     
-    # Predict
-    prediction = model.predict(img)[0][0]  # Get probability for Non-Biodegradable
-    
-    # Determine category
+    prediction = model.predict(img)[0][0]  
+
     is_biodegradable = prediction <= 0.5
-    subcategory = classify_subcategory(is_biodegradable, image.filename)
-    
+    subcategory = classify_subcategory(is_biodegradable, filename)
+
     if is_biodegradable:
         return f"Biodegradable - {subcategory} ({(1 - prediction) * 100:.2f}%)"
     else:
@@ -61,5 +58,5 @@ if uploaded_file is not None:
     st.image(image, caption="Uploaded Image", use_column_width=True)
     
     # Predict instantly after upload
-    prediction_result = predict_waste(image)
+    prediction_result = predict_waste(image, uploaded_file.name)
     st.write("Prediction:", prediction_result)
