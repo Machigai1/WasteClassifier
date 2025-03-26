@@ -1,7 +1,6 @@
 import streamlit as st
 import tensorflow as tf
 import numpy as np
-import cv2
 import os
 from PIL import Image
 
@@ -55,6 +54,23 @@ def predict_waste(image, filename):
 
 # Streamlit UI
 st.set_page_config(page_title="Waste Classifier", page_icon="♻️", layout="wide")
+
+# Background image using CSS
+background_image = "https://png.pngtree.com/thumb_back/fh260/background/20220217/pngtree-beautiful-hand-painted-green-garbage-collection-illustration-background-image_945238.jpg"  # Replace with your image URL or path
+
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url("{background_image}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }}
+    </style>
+    """, unsafe_allow_html=True
+)
+
 st.title("♻️ Waste Classification System")
 
 # Layout with two columns, adjusting height for right column
