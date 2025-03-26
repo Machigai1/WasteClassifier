@@ -7,13 +7,17 @@ from PIL import Image
 
 # Load the trained model dynamically
 model_path = "wasteclass.h5"
-model = tf.keras.models.load_model(model_path)
+if os.path.exists(model_path):
+    model = tf.keras.models.load_model(model_path)
+else:
+    st.error("Model file not found! Please ensure 'wasteclass.h5' is in the directory.")
+    st.stop()
 
 # Define subcategories manually
 biodegradable_types = ["Food", "Paper", "Cardboard"]
 non_biodegradable_types = ["Glass", "Metal", "Plastic"]
 
-# Function to determine subcategory (Mock logic: Modify as needed)
+# Function to determine subcategory
 def classify_subcategory(is_biodegradable, filename):
     filename = filename.lower()
     if is_biodegradable:
@@ -32,7 +36,7 @@ def classify_subcategory(is_biodegradable, filename):
             return "Plastic"
 
 # Function to preprocess and predict image
-def predict_waste(image):
+def predict_waste(image, filename):
     img = image.resize((224, 224))  # Resize to match model input size
     img = np.array(img) / 255.0  # Normalize
     img = np.expand_dims(img, axis=0)  # Add batch dimension
@@ -42,7 +46,7 @@ def predict_waste(image):
     
     # Determine category
     is_biodegradable = prediction <= 0.5
-    subcategory = classify_subcategory(is_biodegradable, image.filename)
+    subcategory = classify_subcategory(is_biodegradable, filename)
     
     if is_biodegradable:
         return f"Biodegradable - {subcategory} ({(1 - prediction) * 100:.2f}%)"
@@ -58,8 +62,8 @@ col1, col2 = st.columns([1, 1])
 
 with col1:
     st.write("Upload an image to classify it as Biodegradable or Non-Biodegradable.")
-    st.write("Biodegradable Types: Food, Paper, Cardboard")
-    st.write("Non-Biodegradable Types: Glass, Metal, Plastic")
+    st.write("**Biodegradable Types:** Food, Paper, Cardboard")
+    st.write("**Non-Biodegradable Types:** Glass, Metal, Plastic")
     
     # Display Limitations
     st.warning("*Limitations:* This model will predict any image as either Biodegradable or Non-Biodegradable, even if the image is not waste-related.")
@@ -73,6 +77,6 @@ with col2:
         st.image(image, caption="Uploaded Image", use_column_width=True)
         
         # Predict instantly after upload
-        prediction_result = predict_waste(image)
+        prediction_result = predict_waste(image, uploaded_file.name)
         st.write("### Prediction:")
         st.write(prediction_result)
