@@ -56,7 +56,7 @@ def predict_waste(image, filename):
 st.set_page_config(page_title="Waste Classifier", page_icon="♻️", layout="wide")
 
 # Background image using CSS
-background_image = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoTFxkerPbkkTCWOJME2xwv_80heIfHlmgZqdStMxEhgjA6GSoxSElSzU-QTEekDEwAXYbyuwjL6DqmhrbwDl-R9hmZx2Zbqrym2y1assxnoZAZurlCo2_pMdmrDoZ_b-8KJMeP_vE6L2Y/w919/sung-jin-woo-solo-leveling-uhdpaper.com-4K-7.1072-wp.thumbnail.jpg"  # Replace with your image URL or path
+background_image = "https://i.ytimg.com/vi/tKNG1QELfxQ/maxresdefault.jpg"  # Replace with your image URL or path
 
 st.markdown(
     f"""
