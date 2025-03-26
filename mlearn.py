@@ -74,7 +74,7 @@ with col1:
 with col2:
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
-        st.image(image, caption="Uploaded Image", width=600)  # Set a fixed width for better UI balance
+        st.image(image, caption="Uploaded Image", width=570)  # Set a fixed width for better UI balance
         
         # Predict instantly after upload
         prediction_result = predict_waste(image, uploaded_file.name)
