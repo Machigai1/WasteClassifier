@@ -1,1 +1,1 @@
-"# WasteClassifier" 
+"# Garbage / Waste Classifier Project"
